@@ -1,0 +1,53 @@
+#include <Servo.h>
+
+Servo RotorServo;
+Servo ArmHeight;
+Servo ArmUpdwn;
+int RotorServoPin = 5;
+int ArmHeightPin = 6;
+int ArmHUpdwnPin = 3;
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+RotorServo.attach(RotorServoPin);
+ArmHeight.attach(ArmHeightPin);
+ArmUpdwn.attach(ArmHUpdwnPin);
+
+}
+
+
+void moveArmSlowly(Servo temp, int curpos, int target_angle) {
+  int i;
+  for(i = curpos;i <= target_angle; i++) {
+    temp.write(i);
+    delay(1);
+  }
+
+  
+}
+
+
+void moveleft_do_action() {
+
+RotorServo.write(0);
+
+ArmHeight.write(60);
+ArmUpdwn.write(40);
+delay(2000);
+ArmHeight.write(90);
+delay(2000);
+ArmUpdwn.write(10);
+delay(2000);
+//ArmHeight.write(90);
+}
+
+
+void loop() {
+  // put your main code here, to run repeatedly:
+moveArmSlowly(RotorServo, 0, 45);
+delay(10000);
+//moveleft_do_action();
+
+
+
+}
